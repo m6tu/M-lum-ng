@@ -1,0 +1,28 @@
+body {
+	background-color: #efd7d7;
+}
+
+#gameboard {
+	width: 424px;
+	margin: 0 auto;
+	font-size: 0;
+}
+
+#gamestart {
+	text-align: center;
+}
+
+.card {
+	width: 100px;
+	height: 100px;
+	background-color: white;
+	display: inline-block;
+	margin: 3px;
+
+	background-image: url(../images/background.jpg);
+	background-size: cover;
+	border: 4px solid white;
+	box-sizing: border-box;
+	cursor: pointer;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
