@@ -17,14 +17,12 @@ var ResetTimer = function() {
     document.getElementById("demo").innerHTML = 0;
 };
 
-//Tagastab meile mängija nime
-//document.getElementById("name").value;
 
 
 var resetButton = document.querySelector("#reset");
 var openedTiles = [];
 var messageDisplay = document.querySelector("#message");
-// var modeButtons = document.querySelectorAll(".mode");
+var modeButtons = document.querySelectorAll(".mode");
 var images = [
 	"images/emoji1.jpg",
 	"images/emoji2.jpg",
@@ -36,10 +34,41 @@ var images = [
 	"images/emoji8.jpg"
 ];
 
+// raskusastme nuppude ülesseadmine, hetkel hardcoded kuni andmebaasi ühenduseni
+function setUpModeButtons(){
+    for(var i = 0; i < modeButtons.length; i++){
+        modeButtons[i].addEventListener("click", function(){
+            modeButtons[0].classList.remove("selected");
+            modeButtons[1].classList.remove("selected");
+            this.classList.add("selected");       
+            if(this.textContent === "Easy"){
+                images = [
+                    "images/emoji1.jpg",
+                    "images/emoji2.jpg",
+                    "images/emoji3.png",
+                    "images/emoji4.png",
+                ];
+            } else {
+                images = [
+                    "images/emoji1.jpg",
+                    "images/emoji2.jpg",
+                    "images/emoji3.png",
+                    "images/emoji4.png",
+                    "images/emoji5.png",
+                    "images/emoji6.png",
+                    "images/emoji7.jpg",
+                    "images/emoji8.jpg"
+                ];
+            } 
+            startGame();
+        });
+    }
+}
 
+setUpModeButtons();
 
 function startGame() {
-    //ResetTimer();
+    StartTimer();
     resetButton.textContent = "New Game";
     messageDisplay.textContent = "";
     $('#gameboard').empty();
@@ -97,11 +126,9 @@ function startGame() {
 			}
         
         //mänguvõidu check + uue alustamine        
-        if(openedTiles.length === 2){
+        if(openedTiles.length === images.length){
             StopTimer();
             messageDisplay.textContent = "Time: " + demo.innerHTML + " seconds!";
-            //StartTimer();
-            //ResetTimer();
             openedTiles = [];
             resetButton.textContent = "Play Again?"
         }else {
@@ -111,19 +138,6 @@ function startGame() {
         });
 }
 
+//startGame();
 
-
-startGame();
-
-//$('#start').click(startGame);
 $('#reset').click(startGame);
-
-
-
-
-
-// document.body.style.backgroundColor ="red";
-// document.getElementById("gamboard").style.backgroundColor = "black";
-
-// $("body").css("background-color", "blue");
-// $("gameboard").css("background-color", "red");
