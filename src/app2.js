@@ -1,3 +1,18 @@
+import {HttpClient, json} from 'aurelia-fetch-client'
+
+
+export class app2{
+
+getscore() {
+        let client = new HttpClient();
+
+        client.fetch('http://localhost:8080/score')
+            .then(console.log(response));
+    }
+    
+}
+    
+
 // Timer
 function changeValue() {
   document.getElementById("demo").innerHTML = ++value;

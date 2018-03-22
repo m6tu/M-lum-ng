@@ -1,5 +1,5 @@
 {
-  "name": "aurelia_app",
+  "name": "New",
   "type": "project:application",
   "bundler": {
     "id": "cli",
@@ -47,6 +47,7 @@
           "aurelia-dependency-injection",
           "aurelia-event-aggregator",
           "aurelia-framework",
+          "aurelia-fetch-client",
           "aurelia-history",
           "aurelia-history-browser",
           "aurelia-loader",
@@ -78,6 +79,11 @@
             "path": "../node_modules/aurelia-testing/dist/amd",
             "main": "aurelia-testing",
             "env": "dev"
+          },
+          {
+            "name": "lodash",
+            "path": "../node_modules/lodash",
+            "main": "lodash.min"
           },
           "text"
         ]
@@ -118,8 +124,8 @@
     "source": "src/**/*.js"
   },
   "markupProcessor": {
-    "id": "none",
-    "displayName": "None",
+    "id": "minimum",
+    "displayName": "Minimal Minification",
     "fileExtension": ".html",
     "source": "src/**/*.html"
   },
@@ -130,8 +136,8 @@
     "source": "src/**/*.css"
   },
   "editor": {
-    "id": "sublime",
-    "displayName": "Sublime"
+    "id": "vscode",
+    "displayName": "Visual Studio Code"
   },
   "unitTestRunner": {
     "id": "karma",

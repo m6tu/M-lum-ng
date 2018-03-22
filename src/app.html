@@ -1,3 +1,37 @@
 <template>
+<div if.bind="!gameRunning" click.delegate=startGame(16)> start new game </div>
+<div if.bind="!gameRunning" click.delegate=startGame(8)> start easy game </div>
+
+<div style='color: red;'>time: ${elapsed}</div><br/>
+<div id="gameboard">
+
+	<div 
+		repeat.for="tile of tileList" 
+		class="card"  
+		click.delegate = "onTileClick($index)"
+		css="background-image:url('${tile.background}')">
+	</div>
+
+</div>
+	
+	<div if.bind="gameFinished && !scoreSaved">
+		<label for = "name">Name</label>
+    	<input type = "text" value.bind = "score.name" placeholder = "name">
+		<button type = "button" click.delegate=saveScore()>Send score</button>
+	</div>
+  
+
+	<table>
+		<tr repeat.for="score of scoreList | sort: 'score':'descending'">
+			<td>${score.name}</td>
+			<td>${score.score}</td>
+		</tr>
+	</table>
+
+
+
 
 </template>
+
+
+
