@@ -1,5 +1,7 @@
 body {
+    
 	background-color: #232323;
+    font-family: "Monsterrat", "Avenir";
 }
 
 #gameboard {
@@ -7,18 +9,6 @@ body {
     max-height: 424px;
 	margin: 0 auto;
 	font-size: 0;
-}
-
-#gamestart {
-	text-align: center;
-}
-
-#timerdiv {
-    text-align: center;
-}
-
-form {
-    text-align: center;
 }
 
 .card {
@@ -36,14 +26,9 @@ form {
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-#demo {
-    margin: 0 auto;
-    color: white;
-}
-
 h1 {
-    color: white;
     text-align: center;
+    color: white;
 }
 
 #riba {
@@ -51,10 +36,6 @@ h1 {
     height: 30px;
     text-align: center;
     color: black;
-}
-
-form {
-    color: white;
 }
 
 button {
@@ -82,8 +63,23 @@ button:hover {
 	background: steelblue;
 }
 
+
 #message {
 	display: inline-block;
 	width: 20%;
+    color: #232323;
 }
 
+#skoor {
+    text-align: center;
+}
+
+table {
+    color: white;
+    width: 20%; 
+    margin: 0 auto;
+}
+
+#modeSelector {
+    text-align: center;
+}

@@ -1,4 +1,4 @@
-
+    
 import {HttpClient, json} from 'aurelia-fetch-client';
 
 
@@ -16,27 +16,77 @@ export class App {
     scoreSaved = false
     gameRunning = false
     images = []
+    
+    
 
     constructor() {
         this.initialize()
     }  
 
+
     initialize() {
         this.images = []
+        
 
         for (let i = 0; i < 8; i++ ){
-            this.images.push("images/emoji"+(i+1)+".jpg");
+            this.images.push("src/images/emoji"+(i+1)+".jpg");
         }
 
     }
+    
+    //
+    changeMode(mode) {
+        if (mode === 1){
+            this.images = []
+            for (let i = 0; i < 8; i++ ){
+                this.images.push("src/images/emoji"+(i+1)+".jpg");
+            }
+            console.log("mode=emoji");
+            } else if(mode === 2){
+                this.images = []
+                for (let i = 0; i < 8; i++ ){
+                    this.images.push("src/images/animal"+(i+1)+".jpg");
+                }
+                console.log("mode=Animals");
+                } else {
+                    console.log("pole valikut!")
+                    }
+    }
 
     startGame(numOfTiles){
+        newBtn.textContent = "New Game";
+        //Muudab raskusastme valiku aktiivseks
+        if (numOfTiles === 8){
+            $( "button" ).removeClass( "selected" )
+            $( "#easyBtn" ).addClass( "selected" )
+            /*this.images = []
+            for (let i = 0; i < 8; i++ ){
+            
+            this.images.push("src/images/animal"+(i+1)+".jpg");
+        }*/
+        } else {
+            $( "button" ).removeClass( "selected" )
+            $( "#hardBtn" ).addClass( "selected" )
+        }
+        
+        /*if ($("#emojiBtn").hasClass("valitud")){
+            console.log("emoji");
+            for (let i = 0; i < 8; i++ ){
+                this.images.push("src/images/emoji"+(i+1)+".jpg");
+                }
+        } else if($("#animalBtn").hasClass("valitud")) {
+            console.log("animal");
+            for (let i = 0; i < 8; i++ ){
+                this.images.push("src/images/animal"+(i+1)+".jpg");
+                }
+        }*/
+        
         this.tileList = [];    
 
         // Iga pilt lükatakse 2 korda ruutudele ning seejärel segatakse ruudud
         for (let i = 0; i < numOfTiles/2; i++) {
-            this.tileList.push({image: this.images[i], class:"", background:"images/background.jpg"});
-            this.tileList.push({image: this.images[i], class:"", background:"images/background.jpg"});
+            this.tileList.push({image: this.images[i], class:"", background:"src/images/background.jpg"});
+            this.tileList.push({image: this.images[i], class:"", background:"src/images/background.jpg"});
 
         };
         this.tileList = _.shuffle(this.tileList);
@@ -53,12 +103,15 @@ export class App {
 
     }  
 
+
+
     endGame () {
         console.log ('end');
         window.clearInterval(this.timer);
         this.gameRunning = false;
         this.gameFinished = true;
         this.score.score = this.elapsed;
+        newBtn.textContent = "Play Again?";
     }
 
     onTileClick(tileNum){
@@ -89,7 +142,7 @@ export class App {
 
     isGameOver() {
         for (let i = 0; i < this.tileList.length; i++) {
-            if (this.tileList[i].background=="images/background.jpg") return false;
+            if (this.tileList[i].background=="src/images/background.jpg") return false;
         }
         return true;
     }
@@ -101,10 +154,10 @@ export class App {
     hideTiles(delay, tileNum1, tileNum2){
         console.log ('hide');
         window.setTimeout(() => {
-            this.tileList[tileNum1].background="images/background.jpg"
-            this.tileList[tileNum2].background="images/background.jpg"
+            this.tileList[tileNum1].background="src/images/background.jpg"
+            this.tileList[tileNum2].background="src/images/background.jpg"
             this.blocked = false;
-        }, delay * 1000);
+        }, delay * 500);
         // this.tileList[tileNum].background="url('images/background.jpg')";
 
     }

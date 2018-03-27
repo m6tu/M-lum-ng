@@ -1,35 +1,43 @@
 <template>
-<div if.bind="!gameRunning" click.delegate=startGame(16)> start new game </div>
-<div if.bind="!gameRunning" click.delegate=startGame(8)> start easy game </div>
+    <div><h1>Find the Pair - Memory Game</h1></div> 
+    
+    <div id="riba">
+            <button id="newBtn" click.delegate=startGame(16)>New Game</button>
+            <span id="message" >Time: ${elapsed}</span>
+            <button id="easyBtn"  click.delegate=startGame(8) class="mode">Easy</button>
+            <button id="hardBtn"  click.delegate=startGame(16) class="mode selected">Hard</button>
+            
+    </div>
+    
+    <div id="modeSelector">
+        <button id="emojiBtn" click.delegate=changeMode(1) class="mode">Emoji</button>
+        <button id="animalBtn" click.delegate=changeMode(2) class="mode">Animals</button>
+    </div>
 
-<div style='color: red;'>time: ${elapsed}</div><br/>
-<div id="gameboard">
-
-	<div 
-		repeat.for="tile of tileList" 
-		class="card"  
-		click.delegate = "onTileClick($index)"
-		css="background-image:url('${tile.background}')">
-	</div>
-
-</div>
+    <div id="gameboard">
+        <div 
+            repeat.for="tile of tileList" 
+            class="card"  
+            click.delegate = "onTileClick($index)"
+            css="background-image:url('${tile.background}')">
+        </div>
+    </div>
 	
-	<div if.bind="gameFinished && !scoreSaved">
-		<label for = "name">Name</label>
-    	<input type = "text" value.bind = "score.name" placeholder = "name">
+	<div id="skoor" if.bind="gameFinished && !scoreSaved">
+    	<input type = "text" maxlength="16" value.bind = "score.name" placeholder = "Player name">
 		<button type = "button" click.delegate=saveScore()>Send score</button>
 	</div>
-  
-
-	<table>
+    
+    
+    <table if.bind="!gameRunning">
 		<tr repeat.for="score of scoreList | sort: 'score':'descending'">
 			<td>${score.name}</td>
 			<td>${score.score}</td>
 		</tr>
 	</table>
-
-
-
+    
+   
+	
 
 </template>
 
