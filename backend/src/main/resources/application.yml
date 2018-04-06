@@ -1,9 +1,15 @@
 spring.jmx:
    enabled: false
 
+#spring.datasource:
+#    driverClassName: org.h2.Driver
+#    url: jdbc:h2:mem:bootexample;MODE=MySQL
+
 spring.datasource:
-    driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:bootexample;MODE=MySQL
+    driverClassName: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost/memorygame
+    username: memorygame
+    password: demo
 
 server:
   port: 8080
