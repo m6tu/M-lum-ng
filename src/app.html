@@ -2,16 +2,15 @@
     <div><h1>Find the Pair - Memory Game</h1></div> 
     
     <div id="riba">
-            <button id="newBtn" click.delegate=startGame(16)>New Game</button>
+            <button id="newBtn" click.delegate=startGame(0,0)>New Game</button>
             <span id="message" >Time: ${elapsed}</span>
-            <button id="easyBtn"  click.delegate=startGame(8) class="mode">Easy</button>
-            <button id="hardBtn"  click.delegate=startGame(16) class="mode selected">Hard</button>
-            
+            <button id="easyBtn" click.delegate=startGame(8,0) class="mode" class.bind="currentNumOfTiles==8 ? 'selected' : ''">Easy</button>
+            <button id="hardBtn" click.delegate=startGame(16,0) class="mode" class.bind="currentNumOfTiles==16 ? 'selected' : ''">Hard</button>
     </div>
     
     <div id="modeSelector">
-        <button id="emojiBtn" click.delegate=changeMode(1) class="mode">Emoji</button>
-        <button id="animalBtn" click.delegate=changeMode(2) class="mode">Animals</button>
+        <button id="emojiBtn" click.delegate=startGame(0,1) class="mode" class.bind="currentKind==1 ? 'selected' : ''">Emoji</button>
+        <button id="animalBtn" click.delegate=startGame(0,2) class="mode" class.bind="currentKind==2 ? 'selected' : ''">Animals</button>
     </div>
 
     <div id="gameboard">
@@ -35,10 +34,6 @@
 			<td>${score.score}</td>
 		</tr>
 	</table>
-    
-   
-	
-
 </template>
 
 
