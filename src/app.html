@@ -29,11 +29,53 @@
     
     
     <table if.bind="!gameRunning">
+        <tr>
+            <td>Name</td>
+            <td>Time</td>
+            <td>Mode</td>
+            <td>Type</td>
+        </tr>
 		<tr repeat.for="score of scoreList | sort: 'score':'descending'">
 			<td>${score.name}</td>
 			<td>${score.score}</td>
+            <td>${score.mode}</td>
+            <td>${score.type}</td>
 		</tr>
 	</table>
+    
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>Time</td>
+            <td>Mode</td>
+            <td>Type</td>
+        </tr>
+		<tr repeat.for="score of easyScoreList">
+			<td>${score.name}</td>
+			<td>${score.score}</td>
+            <td>${score.mode}</td>
+            <td>${score.type}</td>
+		</tr>
+	</table>
+    
+    <!--
+    <button type = "button" click.delegate=showEasy()>Show easy scores</button>
+    <button>Show hard scores</button>
+    <table if.bind="showeasy">
+        <tr>
+            <td>Name</td>
+            <td>Time</td>
+            <td>Mode</td>
+            <td>Type</td>
+        </tr>
+		<tr repeat.for="score of scoreList | sort: 'score':'ascending'">
+			<td>${score.name}</td>
+			<td>${score.score}</td>
+            <td>${score.mode}</td>
+            <td>${score.type}</td>
+		</tr>
+	</table>
+-->
 </template>
 
 

@@ -16,6 +16,8 @@ export class App {
     scoreSaved = false
     gameRunning = false
     images = []
+    showeasy = false
+    easyScoreList = []
 
     currentNumOfTiles = 8
     currentKind = 1
@@ -36,7 +38,20 @@ export class App {
         }
     }
 
+    showEasy(){
+        this.showeasy = true;
+        for (let i = 0; i < this.scoreList.length; i++ ){
+            //console.log(this.scoreList)
+            if(this.scoreList[i].mode === 8){
+                this.easyScoreList.push(this.scoreList[i])
+                console.log(this.easyScoreList)
+            }
+        }
+    }
+    
     startGame (numOfTiles, kind) {
+        this.showEasy()
+        //.log(this.scoreList)
 
         if (!numOfTiles) numOfTiles = this.currentNumOfTiles
         if (!kind) kind = this.currentKind
@@ -87,7 +102,11 @@ export class App {
         this.gameRunning = false
         this.gameFinished = true
         this.score.score = this.elapsed
+        this.score.mode = this.currentNumOfTiles
+        this.score.type = this.currentKind
         newBtn.textContent = "Play Again?"
+        
+    
     }
 
     onTileClick(tileNum){
@@ -135,7 +154,7 @@ export class App {
             this.blocked = false
         }, delay * 500)
     }
-
+    
     saveScore() {
         this.scoreSaved = true
         this.httpClient.fetch('http://localhost:8080/scores/add', {
@@ -162,7 +181,7 @@ export class SortValueConverter {
     toView(array, property, direction) {
         if (!array)
             return array;
-        let factor = direction.match(/^desc*/i) ? 1 : -1
+        let factor = direction.match(/^asc*/i) ? 1 : -1
         return array.sort((a, b) => {
             let textA = a.toUpperCase ? a[property].toUpperCase() : a[property]
             let textB = b.toUpperCase ? b[property].toUpperCase() : b[property]

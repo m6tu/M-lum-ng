@@ -19,5 +19,7 @@ public class Score {
     int id;
     String name;
     int score;
+    int mode;
+    int type;
 
 }
