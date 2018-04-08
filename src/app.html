@@ -2,6 +2,7 @@
     <div><h1>Find the Pair - Memory Game</h1></div> 
     
     <div id="riba">
+           
             <button id="newBtn" click.delegate=startGame(0,0)>New Game</button>
             <span id="message" >Time: ${elapsed}</span>
             <button id="easyBtn" click.delegate=startGame(8,0) class="mode" class.bind="currentNumOfTiles==8 ? 'selected' : ''">Easy</button>
@@ -28,7 +29,10 @@
 	</div>
     
     
-    <table if.bind="!gameRunning">
+  
+
+  <!--This is a comment. Comments are not displayed in the browser
+   <table if.bind="!gameRunning">
         <tr>
             <td>Name</td>
             <td>Time</td>
@@ -42,40 +46,43 @@
             <td>${score.type}</td>
 		</tr>
 	</table>
-    
-    <table>
-        <tr>
-            <td>Name</td>
-            <td>Time</td>
-            <td>Mode</td>
-            <td>Type</td>
-        </tr>
-		<tr repeat.for="score of easyScoreList">
-			<td>${score.name}</td>
-			<td>${score.score}</td>
-            <td>${score.mode}</td>
-            <td>${score.type}</td>
-		</tr>
-	</table>
-    
-    <!--
-    <button type = "button" click.delegate=showEasy()>Show easy scores</button>
-    <button>Show hard scores</button>
-    <table if.bind="showeasy">
-        <tr>
-            <td>Name</td>
-            <td>Time</td>
-            <td>Mode</td>
-            <td>Type</td>
-        </tr>
-		<tr repeat.for="score of scoreList | sort: 'score':'ascending'">
-			<td>${score.name}</td>
-			<td>${score.score}</td>
-            <td>${score.mode}</td>
-            <td>${score.type}</td>
-		</tr>
-	</table>
 -->
+ 
+ <h1>Easy scores</h1>
+    <table if.bind="gameRunning">
+        <tr>
+            <td>Name</td>
+            <td>Time</td>
+            <td>Mode</td>
+            <td>Type</td>
+        </tr>
+		<tr repeat.for="score of scoreList" if.bind="score.mode==8">
+			<td>${score.name}</td>
+			<td>${score.score}</td>
+            <td>${score.mode}</td>
+            <td>${score.type}</td>
+		</tr>
+	</table>
+ 
+ <h1>Hard scores</h1>
+    <table if.bind="gameRunning">
+        <tr>
+            <td>Name</td>
+            <td>Time</td>
+            <td>Mode</td>
+            <td>Type</td>
+        </tr>
+        <tr repeat.for="score of scoreList" if.bind="score.mode==16">
+            <td>${score.name}</td>
+            <td>${score.score}</td>
+            <td>${score.mode}</td>
+            <td>${score.type}</td>
+        </tr>
+    </table>
+
+ <!--   
+
+--> 
 </template>
 
 

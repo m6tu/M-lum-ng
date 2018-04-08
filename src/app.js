@@ -16,9 +16,8 @@ export class App {
     scoreSaved = false
     gameRunning = false
     images = []
-    showeasy = false
-    easyScoreList = []
 
+    
     currentNumOfTiles = 8
     currentKind = 1
 
@@ -36,23 +35,31 @@ export class App {
         for (let i = 0; i < 8; i++ ){
             this.images.push("src/images/emoji"+(i+1)+".jpg")
         }
+
+        this.getScores()
+ 
+       	console.log("initialize finished")
     }
 
-    showEasy(){
-        this.showeasy = true;
-        for (let i = 0; i < this.scoreList.length; i++ ){
-            //console.log(this.scoreList)
-            if(this.scoreList[i].mode === 8){
-                this.easyScoreList.push(this.scoreList[i])
-                console.log(this.easyScoreList)
-            }
-        }
+
+
+
+
+    getScores() {
+    	console.log(this.scoreList)
+        this.httpClient.fetch('http://localhost:8080/scores')
+        .then(response => response.json())
+        .then(data => {
+            this.scoreList = data
+            console.log("data in scoreList")
+            console.log(this.scoreList)
+
+        })
     }
-    
+
+
     startGame (numOfTiles, kind) {
-        this.showEasy()
-        //.log(this.scoreList)
-
+     
         if (!numOfTiles) numOfTiles = this.currentNumOfTiles
         if (!kind) kind = this.currentKind
 
@@ -167,13 +174,6 @@ export class App {
         })
     }
 
-    getScores() {
-        this.httpClient.fetch('http://localhost:8080/scores')
-        .then(response => response.json())
-        .then(data => {
-            this.scoreList = data
-        })
-    }
 }
 
 // https://gist.github.com/httpJunkie/431561420d62a746e02eef2d218d07d1
