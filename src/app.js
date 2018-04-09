@@ -72,6 +72,8 @@ export class App {
         switch (kind) {
             case 1: prefix = 'emoji'; break
             case 2: prefix = 'animal'; break
+            case 3: prefix = 'Country'; break
+            case 4: prefix = 'colors'; break
         }
 
         this.images = []

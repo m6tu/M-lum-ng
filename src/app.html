@@ -1,6 +1,14 @@
 <template>
     <div><h1>Find the Pair - Memory Game</h1></div> 
     
+    <div id="modeSelector">
+        <button id="emojiBtn" click.delegate=startGame(0,1) class="mode" class.bind="currentKind==1 ? 'selected' : ''">Emoji</button>
+        <button id="animalBtn" click.delegate=startGame(0,2) class="mode" class.bind="currentKind==2 ? 'selected' : ''">Animals</button>
+        <button id="animalBtn" click.delegate=startGame(0,3) class="mode" class.bind="currentKind==3 ? 'selected' : ''">Coutries</button>
+        <button id="animalBtn" click.delegate=startGame(0,4) class="mode" class.bind="currentKind==4 ? 'selected' : ''">Colors</button>
+        
+    </div>
+    
     <div id="riba">
            
             <button id="newBtn" click.delegate=startGame(0,0)>New Game</button>
@@ -9,10 +17,7 @@
             <button id="hardBtn" click.delegate=startGame(16,0) class="mode" class.bind="currentNumOfTiles==16 ? 'selected' : ''">Hard</button>
     </div>
     
-    <div id="modeSelector">
-        <button id="emojiBtn" click.delegate=startGame(0,1) class="mode" class.bind="currentKind==1 ? 'selected' : ''">Emoji</button>
-        <button id="animalBtn" click.delegate=startGame(0,2) class="mode" class.bind="currentKind==2 ? 'selected' : ''">Animals</button>
-    </div>
+    
 
     <div id="gameboard">
         <div 
@@ -29,7 +34,6 @@
 	</div>
     
     
-  
 
   <!--This is a comment. Comments are not displayed in the browser
    <table if.bind="!gameRunning">
@@ -48,7 +52,7 @@
 	</table>
 -->
  
- <h1>Easy scores</h1>
+ <h4>Easy scores</h4>
     <table if.bind="gameRunning">
         <tr>
             <td>Name</td>
@@ -64,7 +68,7 @@
 		</tr>
 	</table>
  
- <h1>Hard scores</h1>
+ <h4>Hard scores</h4>
     <table if.bind="gameRunning">
         <tr>
             <td>Name</td>
