@@ -17,6 +17,7 @@ export class App {
     gameRunning = false
     images = []
 
+
     
     currentNumOfTiles = 8
     currentKind = 1
@@ -72,22 +73,48 @@ export class App {
         switch (kind) {
             case 1: prefix = 'emoji'; break
             case 2: prefix = 'animal'; break
-            case 3: prefix = 'Country'; break
-            case 4: prefix = 'colors'; break
+            case 3: prefix = 'country'; break
+            case 4: prefix = 'translate'; break
+            case 5: prefix = 'match'; break
+            case 6: prefix = 'tolge'; break
         }
 
         this.images = []
-        for (let i = 0; i < 8; i++ ){
-            this.images.push("src/images/"+prefix+(i+1)+".jpg")
-        }
+        
+        if(kind === 1 || kind === 2){
+            //Emoji + animals mode
+            for (let i = 0; i < 8; i++ ){
+                this.images.push("src/images/"+prefix+(i+1)+".jpg")
+                }
+            } else {
+                //Erinevate piltide mode
+                for (let i = 0; i < numOfTiles/2; i++ ){
+                    this.images.push("src/images/"+prefix+(i+1)+".jpg")
+                    }
+                if (prefix==='country'){
+                    prefix ='match'
+                } else if (prefix==='translate'){
+                    prefix = 'tolge'
+                    }   
+                for (let i = 0; i < numOfTiles/2; i++ ){
+                    this.images.push("src/images/"+prefix+(i+1)+".jpg")
+                    }
+                }
 
         this.tileList = []
 
         // Iga pilt lükatakse 2 korda ruutudele ning seejärel segatakse ruudud
-        for (let i = 0; i < numOfTiles/2; i++) {
-            this.tileList.push({image: this.images[i], class:"", background:"src/images/background.jpg"})
-            this.tileList.push({image: this.images[i], class:"", background:"src/images/background.jpg"})
-        }
+        if(kind === 1 || kind === 2){
+            for (let i = 0; i < numOfTiles/2; i++) {
+                this.tileList.push({image: this.images[i], class:"", background:"src/images/background.jpg"})
+                this.tileList.push({image: this.images[i], class:"", background:"src/images/background.jpg"})
+                }
+            } else {
+                //Countries tüübi puhul lükatakse iga pilt 1 kord ruutudele
+                for (let i = 0; i < numOfTiles; i++) {
+                    this.tileList.push({image: this.images[i], class:"", background:"src/images/background.jpg"})
+                    }
+                }
 
         // TODO: remove lodash
         this.tileList = _.shuffle(this.tileList)
@@ -120,28 +147,77 @@ export class App {
 
     onTileClick(tileNum){
         App.log(tileNum)
-
         if (this.blocked) return
         if (this.openedTile===tileNum) return
-
         this.showTile(tileNum)
 
-        if (this.openedTile===undefined) {
-                App.log ('1st')
-                this.openedTile = tileNum
-        } else {
-            if(this.tileList[tileNum].image===this.tileList[this.openedTile].image){
-                App.log ('match')
-                this.openedTile = undefined
-                if (this.isGameOver())
-                    this.endGame()
+        //Emoji ja animal mode matchimine
+        if(this.currentKind === 1 || this.currentKind === 2){
+            if (this.openedTile===undefined) {
+                    App.log ('1st')
+                    this.openedTile = tileNum
             } else {
-                App.log ('2nd')
-                this.blocked = true
-                this.hideTiles(1, tileNum, this.openedTile)
-                this.openedTile = undefined
+                if(this.tileList[tileNum].image===this.tileList[this.openedTile].image){
+                    App.log ('match')
+                    this.openedTile = undefined
+                    if (this.isGameOver())
+                        this.endGame()
+                } else {
+                    App.log ('2nd')
+                    this.blocked = true
+                    this.hideTiles(1, tileNum, this.openedTile)
+                    this.openedTile = undefined
+                    }
+                }
+            } else {
+                if (this.openedTile===undefined) {
+                    App.log ('1st')
+                    this.openedTile = tileNum
+            } else if(this.currentKind === 3) {
+                //Countries mode matchimine
+                let stringLength = this.tileList[tileNum].image.length
+                let picNum = this.tileList[tileNum].image.charAt(stringLength - 5)
+                
+                if(this.tileList[tileNum].image==="src/images/country" + picNum + ".jpg" || this.tileList[tileNum].image==="src/images/match" + picNum + ".jpg"){
+                    if(this.tileList[this.openedTile].image === "src/images/match" + picNum + ".jpg" || this.tileList[this.openedTile].image === "src/images/country" + picNum + ".jpg"){
+                        App.log ('match')
+                        this.openedTile = undefined
+                        if (this.isGameOver())
+                            this.endGame()
+                        } else {
+                            App.log ('2nd')
+                            this.blocked = true
+                            this.hideTiles(1, tileNum, this.openedTile)
+                            this.openedTile = undefined
+                            }
+                    } else {
+                        App.log ('2nd')
+                        this.blocked = true
+                        this.hideTiles(1, tileNum, this.openedTile)
+                        this.openedTile = undefined
+                        }
+                
+                } else if(this.currentKind === 4) {
+                    //Language mode matchimine
+                    let stringLength = this.tileList[tileNum].image.length
+                    let picNum = this.tileList[tileNum].image.charAt(stringLength - 5)
+                    
+                    if(this.tileList[tileNum].image==="src/images/translate" + picNum + ".jpg" || this.tileList[tileNum].image==="src/images/tolge" + picNum + ".jpg"){
+                        if(this.tileList[this.openedTile].image === "src/images/tolge" + picNum + ".jpg" || this.tileList[this.openedTile].image === "src/images/translate" + picNum + ".jpg"){
+                            App.log ('match')
+                            this.openedTile = undefined
+                            if (this.isGameOver())
+                                this.endGame()
+                            } else {
+                                App.log ('2nd')
+                                this.blocked = true
+                                this.hideTiles(1, tileNum, this.openedTile)
+                                this.openedTile = undefined
+                                }
+                            } 
+                    }
             }
-        }
+
     }
 
     isGameOver() {
