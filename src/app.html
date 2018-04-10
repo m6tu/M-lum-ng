@@ -2,10 +2,10 @@
     <div><h1>Find the Pair - Memory Game</h1></div> 
     
     <div id="modeSelector">
-        <button id="emojiBtn" click.delegate=startGame(0,1) class="mode" class.bind="currentKind==1 ? 'selected' : ''">Emoji</button>
-        <button id="animalBtn" click.delegate=startGame(0,2) class="mode" class.bind="currentKind==2 ? 'selected' : ''">Animals</button>
-        <button id="countryBtn" click.delegate=startGame(0,3) class="mode" class.bind="currentKind==3 ? 'selected' : ''">Coutries</button>
-        <button id="languageBtn" click.delegate=startGame(0,4) class="mode" class.bind="currentKind==4 ? 'selected' : ''">Language</button>
+        <button click.delegate=startGame(0,1) class="mode" class.bind="currentKind==1 ? 'selected' : ''">Emoji</button>
+        <button click.delegate=startGame(0,2) class="mode" class.bind="currentKind==2 ? 'selected' : ''">Animals</button>
+        <button click.delegate=startGame(0,3) class="mode" class.bind="currentKind==3 ? 'selected' : ''">Coutries</button>
+        <button click.delegate=startGame(0,4) class="mode" class.bind="currentKind==4 ? 'selected' : ''">Language</button>
         
     </div>
     
@@ -51,39 +51,42 @@
 		</tr>
 	</table>
 -->
- 
- <h4>Easy scores</h4>
-    <table if.bind="gameRunning">
-        <tr>
-            <td>Name</td>
-            <td>Time</td>
-            <td>Mode</td>
-            <td>Type</td>
-        </tr>
-		<tr repeat.for="score of scoreList" if.bind="score.mode==8">
-			<td>${score.name}</td>
-			<td>${score.score}</td>
-            <td>${score.mode}</td>
-            <td>${score.type}</td>
-		</tr>
-	</table>
- 
- <h4>Hard scores</h4>
-    <table if.bind="gameRunning">
-        <tr>
-            <td>Name</td>
-            <td>Time</td>
-            <td>Mode</td>
-            <td>Type</td>
-        </tr>
-        <tr repeat.for="score of scoreList" if.bind="score.mode==16">
-            <td>${score.name}</td>
-            <td>${score.score}</td>
-            <td>${score.mode}</td>
-            <td>${score.type}</td>
-        </tr>
-    </table>
-
+ <div id="edetabel" if.bind="!gameRunning">
+     <div id="easytable">
+         <h3>Easy scores</h3>
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td>Time</td>
+                    <td>Mode</td>
+                    <td>Type</td>
+                </tr>
+                <tr repeat.for="score of scoreList" if.bind="score.mode==8">
+                    <td>${score.name}</td>
+                    <td>${score.score}</td>
+                    <td>${score.mode}</td>
+                    <td>${score.type}</td>
+                </tr>
+            </table>
+     </div>
+     <div id="hardtable">
+         <h3>Hard scores</h3>
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td>Time</td>
+                    <td>Mode</td>
+                    <td>Type</td>
+                </tr>
+                <tr repeat.for="score of scoreList" if.bind="score.mode==16">
+                    <td>${score.name}</td>
+                    <td>${score.score}</td>
+                    <td>${score.mode}</td>
+                    <td>${score.type}</td>
+                </tr>
+            </table>
+     </div>
+</div>
  <!--   
 
 --> 

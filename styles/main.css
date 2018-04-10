@@ -77,14 +77,27 @@ button:hover {
 table {
     color: white;
     width: 20%; 
-    margin: 0 auto;
+}
+
+#easytable {
+    float:left;
+}
+
+#hardtable {
+    float: right;
+}
+
+#edetabel {
+    width: 50%;
+    margin: auto;
+    
 }
 
 #modeSelector {
     text-align: center;
 }
 
-h4 {
+h3 {
     text-align: center;
     color: white;
 }
