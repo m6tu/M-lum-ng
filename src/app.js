@@ -18,7 +18,6 @@ export class App {
     images = []
 
 
-    
     currentNumOfTiles = 8
     currentKind = 1
 
@@ -36,15 +35,9 @@ export class App {
         for (let i = 0; i < 8; i++ ){
             this.images.push("src/images/emoji"+(i+1)+".jpg")
         }
-
         this.getScores()
- 
        	console.log("initialize finished")
     }
-
-
-
-
 
     getScores() {
     	console.log(this.scoreList)
@@ -77,16 +70,21 @@ export class App {
             case 4: prefix = 'translate'; break
             case 5: prefix = 'match'; break
             case 6: prefix = 'tolge'; break
+            case 7: prefix = 'pic'; break
         }
 
         this.images = []
         
         if(kind === 1 || kind === 2){
+            document.getElementById("gameboard").style.maxHeight = "424px";
+            document.getElementById("gameboard").style.maxWidth = "424px";
             //Emoji + animals mode
             for (let i = 0; i < 8; i++ ){
                 this.images.push("src/images/"+prefix+(i+1)+".jpg")
                 }
-            } else {
+            } else if(kind === 3 || kind === 4) {
+                document.getElementById("gameboard").style.maxHeight = "424px";
+                document.getElementById("gameboard").style.maxWidth = "424px";
                 //Erinevate piltide mode
                 for (let i = 0; i < numOfTiles/2; i++ ){
                     this.images.push("src/images/"+prefix+(i+1)+".jpg")
@@ -99,6 +97,12 @@ export class App {
                 for (let i = 0; i < numOfTiles/2; i++ ){
                     this.images.push("src/images/"+prefix+(i+1)+".jpg")
                     }
+                } else if(kind === 7){
+                    for (let i = 0; i < numOfTiles*3; i++ ){
+                        this.images.push("src/images/Mix/"+prefix+(i+1)+".jpg")
+                        }
+                    document.getElementById("gameboard").style.maxHeight = "848px";
+                    document.getElementById("gameboard").style.maxWidth = "656.7px";
                 }
 
         this.tileList = []
@@ -109,13 +113,18 @@ export class App {
                 this.tileList.push({image: this.images[i], class:"", background:"src/images/background.jpg"})
                 this.tileList.push({image: this.images[i], class:"", background:"src/images/background.jpg"})
                 }
+            } else if(kind === 7){
+                for (let i = 0; i < numOfTiles*1.1; i++) {
+                this.tileList.push({image: this.images[i], class:"", background:"src/images/background.jpg"})
+                this.tileList.push({image: this.images[i], class:"", background:"src/images/background.jpg"})
+                }
             } else {
                 //Countries tüübi puhul lükatakse iga pilt 1 kord ruutudele
                 for (let i = 0; i < numOfTiles; i++) {
                     this.tileList.push({image: this.images[i], class:"", background:"src/images/background.jpg"})
                     }
                 }
-
+        
         // TODO: remove lodash
         this.tileList = _.shuffle(this.tileList)
 
@@ -141,10 +150,11 @@ export class App {
         this.score.mode = this.currentNumOfTiles
         this.score.type = this.currentKind
         newBtn.textContent = "Play Again?"
-        
+        console.log(this.elapsed)        
     
     }
 
+    //CEALN CODE KIRJUTADA !!
     onTileClick(tileNum){
         App.log(tileNum)
         if (this.blocked) return
@@ -152,7 +162,7 @@ export class App {
         this.showTile(tileNum)
 
         //Emoji ja animal mode matchimine
-        if(this.currentKind === 1 || this.currentKind === 2){
+        if(this.currentKind === 1 || this.currentKind === 2 || this.currentKind === 7){
             if (this.openedTile===undefined) {
                     App.log ('1st')
                     this.openedTile = tileNum
@@ -267,4 +277,3 @@ export class SortValueConverter {
         });
     }
 }
-
