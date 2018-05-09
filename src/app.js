@@ -102,7 +102,7 @@ export class App {
                         this.images.push("src/images/Mix/"+prefix+(i+1)+".jpg")
                         }
                     document.getElementById("gameboard").style.maxHeight = "848px";
-                    document.getElementById("gameboard").style.maxWidth = "656.7px";
+                    document.getElementById("gameboard").style.maxWidth = "657px";
                 }
 
         this.tileList = []
