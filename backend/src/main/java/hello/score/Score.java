@@ -20,6 +20,6 @@ public class Score {
     String name;
     int score;
     int mode;
-    int type;
+    String type;
 
 }
