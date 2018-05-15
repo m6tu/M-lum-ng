@@ -4,7 +4,7 @@
     <div id="modeSelector">
         <button click.delegate=startGame(0,1) class="mode" class.bind="currentKind==1 ? 'selected' : ''">Emoji</button>
         <button click.delegate=startGame(0,2) class="mode" class.bind="currentKind==2 ? 'selected' : ''">Animals</button>
-        <button click.delegate=startGame(0,3) class="mode" class.bind="currentKind==3 ? 'selected' : ''">Coutries</button>
+        <button click.delegate=startGame(0,3) class="mode" class.bind="currentKind==3 ? 'selected' : ''">Countries</button>
         <button click.delegate=startGame(0,4) class="mode" class.bind="currentKind==4 ? 'selected' : ''">Language</button>
         <button click.delegate=startGame(0,7) class="mode" class.bind="currentKind==7 ? 'selected' : ''">Mix</button>
 
@@ -37,42 +37,26 @@
     
     
 
-  <!--This is a comment. Comments are not displayed in the browser
-   <table if.bind="!gameRunning">
-        <tr>
-            <td>Name</td>
-            <td>Time</td>
-            <td>Mode</td>
-            <td>Type</td>
-        </tr>
-		<tr repeat.for="score of scoreList | sort: 'score':'descending'">
-			<td>${score.name}</td>
-			<td>${score.score}</td>
-            <td>${score.mode}</td>
-            <td>${score.type}</td>
-		</tr>
-	</table>
--->
  <div id="edetabel" if.bind="!gameRunning">
      <div id="easytable">
-         <h3>Easy scores</h3>
+         <h3>Highscores for 2x4 game (easy)</h3>
             <table>
                 <tr>
                     <td>Name</td>
-                    <td>Time</td>
-                    <td>Mode</td>
+                    <td>Score</td>
+                    <!--<td>Mode</td>-->
                     <td>Type</td>
                 </tr>
-                <tr repeat.for="score of scoreList" if.bind="score.mode==8">
+                <tr repeat.for="score of scoreList | sort: 'score':'descending'" if.bind="score.mode==8" >
                     <td>${score.name}</td>
                     <td>${score.score}</td>
-                    <td>${score.mode}</td>
+                  <!--  <td>${score.mode}</td>-->
                     <td>${score.type}</td>
                 </tr>
             </table>
      </div>
      <div id="hardtable">
-         <h3>Hard scores</h3>
+         <h3>Highscores for 4x4 game (hard)</h3>
             <table>
                 <tr>
                     <td>Name</td>
@@ -80,11 +64,11 @@
                     <td>Mode</td>
                     <td>Type</td>
                 </tr>
-                <tr repeat.for="score of scoreList" if.bind="score.mode==16">
-                    <td>${score.name}</td>
-                    <td>${score.score}</td>
-                    <td>${score.mode}</td>
-                    <td>${score.type}</td>
+                <tr repeat.for="score2 of scoreList2" if.bind="score2.mode==16">
+                    <td>${score2.name}</td>
+                    <td>${score2.score}</td>
+                    <td>${score2.mode}</td>
+                    <td>${score2.type}</td>
                 </tr>
             </table>
      </div>
@@ -93,6 +77,24 @@
 
 --> 
 </template>
+
+
+  <!--This is a comment. Comments are not displayed in the browser
+   <table if.bind="!gameRunning">
+        <tr>
+            <td>Name</td>
+            <td>Time</td>
+            <td>Mode</td>
+            <td>Type</td>
+        </tr>
+        <tr repeat.for="score of scoreList | sort: 'score':'descending'">
+            <td>${score.name}</td>
+            <td>${score.score}</td>
+            <td>${score.mode}</td>
+            <td>${score.type}</td>
+        </tr>
+    </table>
+-->
 
 
 

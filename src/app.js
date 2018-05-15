@@ -7,6 +7,7 @@ export class App {
     httpClient = new HttpClient()
     score = {}
     scoreList = []
+     scoreList2 = []
     tileList = []
     openedTile = undefined
     gameStarted = undefined
@@ -45,6 +46,7 @@ export class App {
         .then(response => response.json())
         .then(data => {
             this.scoreList = data
+            this.scoreList2 = data
             console.log("data in scoreList")
             console.log(this.scoreList)
 
@@ -148,7 +150,21 @@ export class App {
         this.gameFinished = true
         this.score.score = this.elapsed
         this.score.mode = this.currentNumOfTiles
-        this.score.type = this.currentKind
+
+
+        let prefix1 = ''
+        switch (this.currentKind) {
+            case 1: prefix1 = 'emoji'; break
+            case 2: prefix1 = 'animal'; break
+            case 3: prefix1 = 'country'; break
+            case 4: prefix1 = 'translate'; break
+            case 5: prefix1 = 'match'; break
+            case 6: prefix1 = 'tolge'; break
+            case 7: prefix1 = 'pic'; break
+        }
+
+
+        this.score.type = prefix1
         newBtn.textContent = "Play Again?"
         console.log(this.elapsed)        
     
